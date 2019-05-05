@@ -42,11 +42,11 @@ https://github.com/kubernetes/kops/releases
 
 make sure that it works "ex: bucket name clusters.k8s.devops.vpc"
 	
-	aws s3 mb s3://clusters.k8s.devops.vpc
+	    aws s3 mb s3://clusters.k8s.devops.vpc
 
 Expose ENV  "to save the state of the Cluster"
 
-	export KOPS_STATE_STORE=s3://clusters.k8s.devops.vpc
+	    export KOPS_STATE_STORE=s3://clusters.k8s.devops.vpc
 
 
 7. Create DNS Configurations
@@ -71,7 +71,7 @@ Note : if you don't have DNS configuration you could just use gossip based DNS  
 
 10. You could edit in the cluster 
 
-	```kops edit cluster ${Cluster_NAME}````
+	```kops edit cluster ${Cluster_NAME}```
 
 11. Run the Cluster
 
