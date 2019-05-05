@@ -6,9 +6,9 @@ https://kubernetes.io/docs/tasks/tools/install-kubectl/
 https://github.com/kubernetes/kops/
 https://github.com/kubernetes/kops/releases
 
-```chmod +x kops-linux-amd64```
+   ```chmod +x kops-linux-amd64```
 
-```mv kops-linux-amd64 /usr/local/bin/kops```
+   ```mv kops-linux-amd64 /usr/local/bin/kops```
 
 3. install python-pip
 ``` apt-get install pyhon-pip```
