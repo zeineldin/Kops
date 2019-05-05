@@ -18,7 +18,7 @@ https://kubernetes.io/docs/tasks/tools/install-kubectl/
 https://github.com/kubernetes/kops/
 https://github.com/kubernetes/kops/releases
 
-	```wget https://github.com/kubernetes/kops/releases/download/1.11.0/kops-linux-amd64````
+	```wget https://github.com/kubernetes/kops/releases/download/1.11.0/kops-linux-amd64```
 
 	```chmod +x kops-linux-amd64```
 
@@ -40,6 +40,68 @@ https://github.com/kubernetes/kops/releases
 
 6. create new S3 bucket to save your KOPS state  "it has to be at the same KOPS region"
 
-7. create KOPS Cluster 
+make sure that it works "ex: bucket name clusters.k8s.devops.vpc"
 
-``` kops create cluster --zones=eu-west-1a,eu-west-1b,eu-west-1c --topology=private --networking=calico --master-size=t2.micro --master-count=3 --node-size=t2.micro --name ${KOPS_CLUSTER_NAME}```
+```$ aws s3 mb s3://clusters.k8s.devops.vpc```
+
+Expose ENV  "to save the state of the Cluster "
+
+``` export KOPS_STATE_STORE=s3://clusters.k8s.devops.vpc```
+
+
+7. Create DNS Configurations
+
+kubernetes uses DNS for discovery inside the cluster so that you can reach out kubernetes API server from clients.
+create a hosted zone on Route53, say, k8s.devops.vpc. The API server endpoint will then be ex:api.k8s.devops.vpc
+
+8. Create ssh public and private keys
+
+	```ssh-keyget```
+
+it will be created in the default location which is ~/.ssh/id_rsa.pub
+
+9. create KOPS Cluster 
+
+	``` kops create cluster --name=test-kops --ssh-public-key="~/.ssh/id_rsa.pub" --state=s3://clusters.k8s.devops.vpc --zones=eu-west-1a --master-size=t2.micro --node-count=2 --node-size=t2.micro --dns-zone=k8s.devops.vpc
+
+
+Note : if you don't have DNS configuration you could just use gossip based DNS   "ie: zein.cluster.k8s.local""
+
+	```kops create cluster --name=zein.cluster.k8s.local --ssh-public-key="~/.ssh/id_rsa.pub" --state=s3://zein.cluster.k8s.local --zones=eu-west-1a --master-size=t2.micro --node-count=2 --node-size=t2.micro```
+
+10. You could edit in the cluster 
+
+	```kops edit cluster ${Cluster_NAME}````
+
+11. Run the Cluster
+
+	``` kops update cluster test-kops --yes --state=s3://clusters.k8s.devops.vpc```
+
+12. Make Sure that every thing works 
+
+	```kops validate cluster```
+
+13. login to the master server and check the cluster 
+
+	```ssh -i ~/.ssh/id_rsa admin@api.zein.cluster.k8s.local```
+
+14. Create the 1st deployment
+
+	```kubectl run webserver --image=nginx --port= 80 -- replicas=2```
+
+15. Export the deployment
+
+	```kubectl expose deployment webserver --name web-service --type=LoadBalancer --port=80```
+
+
+16. check the service
+
+	```kubectl get service```  
+
+check the port 
+
+
+17. Open the port in the KOPS Cluster Security group
+
+
+18. SEE THE SERVICE FROM THE URL:PORT
