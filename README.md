@@ -17,6 +17,6 @@ https://github.com/kubernetes/kops/releases
 ```pip install -y awscli``` 
 
 5. configure the awscli using your AWS account "you could create free account"
-``` aws configure``
+``` aws configure```
 
 6. "
