@@ -41,12 +41,12 @@ https://github.com/kubernetes/kops/releases
 6. create new S3 bucket to save your KOPS state  "it has to be at the same KOPS region"
 
 make sure that it works "ex: bucket name clusters.k8s.devops.vpc"
+	
+	```aws s3 mb s3://clusters.k8s.devops.vpc```
 
-	```$ aws s3 mb s3://clusters.k8s.devops.vpc```
+Expose ENV  "to save the state of the Cluster"
 
-Expose ENV  "to save the state of the Cluster "
-
-	``` export KOPS_STATE_STORE=s3://clusters.k8s.devops.vpc```
+	```export KOPS_STATE_STORE=s3://clusters.k8s.devops.vpc```
 
 
 7. Create DNS Configurations
