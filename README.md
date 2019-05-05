@@ -42,11 +42,11 @@ https://github.com/kubernetes/kops/releases
 
 make sure that it works "ex: bucket name clusters.k8s.devops.vpc"
 
-```$ aws s3 mb s3://clusters.k8s.devops.vpc```
+	```$ aws s3 mb s3://clusters.k8s.devops.vpc```
 
 Expose ENV  "to save the state of the Cluster "
 
-``` export KOPS_STATE_STORE=s3://clusters.k8s.devops.vpc```
+	``` export KOPS_STATE_STORE=s3://clusters.k8s.devops.vpc```
 
 
 7. Create DNS Configurations
@@ -62,7 +62,7 @@ it will be created in the default location which is ~/.ssh/id_rsa.pub
 
 9. create KOPS Cluster 
 
-	``` kops create cluster --name=test-kops --ssh-public-key="~/.ssh/id_rsa.pub" --state=s3://clusters.k8s.devops.vpc --zones=eu-west-1a --master-size=t2.micro --node-count=2 --node-size=t2.micro --dns-zone=k8s.devops.vpc
+	``` kops create cluster --name=test-kops --ssh-public-key="~/.ssh/id_rsa.pub" --state=s3://clusters.k8s.devops.vpc --zones=eu-west-1a --master-size=t2.micro --node-count=2 --node-size=t2.micro --dns-zone=k8s.devops.vpc```
 
 
 Note : if you don't have DNS configuration you could just use gossip based DNS   "ie: zein.cluster.k8s.local""
@@ -105,3 +105,8 @@ check the port
 
 
 18. SEE THE SERVICE FROM THE URL:PORT
+
+
+19. delete the culster if you want :) 
+
+	```kops delete cluster --name ${CLUSTER_NAME} --yes```
