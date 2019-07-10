@@ -71,7 +71,7 @@ it will be created in the default location which is ~/.ssh/id_rsa.pub
 
 Note : if you don't have DNS configuration you could just use gossip based DNS   "ie: zein.cluster.k8s.local""
 
-	```kops create cluster --zones=eu-west-1a,eu-west-1b,eu-west-1c --name=zein.cluster.k8s.local --ssh-public-key="~/.ssh/id_rsa.pub" --state=s3://zein.cluster.k8s.local  --master-count=3 --master-size=t2.micro --node-count=3 --node-size=t2.micro```
+	kops create cluster --zones=eu-west-1a,eu-west-1b,eu-west-1c --name=zein.cluster.k8s.local --ssh-public-key="~/.ssh/id_rsa.pub" --state=s3://zein.cluster.k8s.local  --master-count=3 --master-size=t2.micro --node-count=3 --node-size=t2.micro
 	
 
 10. You could edit in the cluster 
