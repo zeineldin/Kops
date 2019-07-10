@@ -46,7 +46,7 @@ make sure that it works "ex: bucket name clusters.k8s.devops.vpc"
 	   
 Enable bucker versioning 
 
-	```aws s3api put-bucket-versioning --bucket clusters.k8s.devops.vpc --versioning-configuration Status=Enabled```
+	aws s3api put-bucket-versioning --bucket clusters.k8s.devops.vpc --versioning-configuration Status=Enabled
 
 Expose ENV  "to save the state of the Cluster"
 
