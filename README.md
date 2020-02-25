@@ -26,7 +26,7 @@ https://github.com/kubernetes/kops/releases
 
 3. install python-pip
 
-	``` apt-get install pyhon-pip```
+	```sudo apt install python3-pip```
 
 4. install AWS CLI
 
