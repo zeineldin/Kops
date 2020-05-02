@@ -32,7 +32,7 @@ apt-get install -y awscli
 
 4. configure the awscli using your AWS account "you could create free account"
 
-	``` aws configure```
+aws configure
 
    Note : the AWS user must have adminstration permission 
 
