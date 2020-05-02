@@ -21,14 +21,14 @@ https://github.com/kubernetes/kops/releases
 	```curl -Lo kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-darwin-amd64
 ```
 
-	```chmod +x kops-linux-amd64```
+chmod +x kops-linux-amd64
 
-	```mv kops-linux-amd64 /usr/local/bin/kops```
+mv kops-linux-amd64 /usr/local/bin/kops
 
 
 3. install AWS CLI
 
-	```apt-get install -y awscli``` 
+apt-get install -y awscli 
 
 4. configure the awscli using your AWS account "you could create free account"
 
