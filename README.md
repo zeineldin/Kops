@@ -3,7 +3,7 @@
 1. install kubectl 
 https://kubernetes.io/docs/tasks/tools/install-kubectl/
 
-         ```curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl```
+         curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
 	
 	```chmod +x ./kubectl```
 
@@ -19,7 +19,9 @@ https://kubernetes.io/docs/tasks/tools/install-kubectl/
 
 3. install AWS CLI
 
-apt-get install -y awscli 
+	```apt-get update```
+	
+	```install -y awscli``` 
 
 4. configure the awscli using your AWS account "you could create free account"
 
@@ -29,17 +31,17 @@ aws configure
 
 5. create new S3 bucket to save your KOPS state  "it has to be at the same KOPS region"
 
-make sure that it works "ex: bucket name clusters.k8s.devops.vpc"
+A. make sure that it works "ex: bucket name k8s-kops-berlin-zeineldin"
 	
-	    aws s3 mb s3://k8s-kops-berlin-zeineldin
+	 aws s3 mb s3://k8s-kops-berlin-zeineldin
 	   
-Enable bucker versioning 
+B. Enable bucker versioning 
 
-	aws s3api put-bucket-versioning --bucket clusters.k8s.devops.vpc --versioning-configuration Status=Enabled
+	aws s3api put-bucket-versioning --bucket k8s-kops-berlin-zeineldin --versioning-configuration Status=Enabled
 
-Expose ENV  "to save the state of the Cluster"
+C. Expose ENV  "to save the state of the Cluster"
 
-	    export KOPS_STATE_STORE=s3://k8s-kops-berlin-zeineldin
+	export KOPS_STATE_STORE=s3://k8s-kops-berlin-zeineldin
 
 
 6. Create DNS Configurations
@@ -49,22 +51,22 @@ create a hosted zone on Route53, say, k8s.devops.vpc. The API server endpoint wi
 
 7. Create ssh public and private keys
 
-	```ssh-keyget```
+	```ssh-keygen```
 
 it will be created in the default location which is ~/.ssh/id_rsa.pub
 
 8. export cluster and bucket name 
 
-```export KOPS_CLUSTER_NAME=berlin.k8s.local ```
+	```export KOPS_CLUSTER_NAME=k8s.berlin.zeinedin.local```
 
 9. create KOPS Cluster 
 
-	 ```kops create cluster --name=${KOPS_CLUSTER_NAME} --ssh-public-key="~/.ssh/id_rsa.pub" --state=s3://k8s-kops-berlin-zeineldin --zones=eu-west-1a --master-size=t2.micro --node-count=2 --node-size=t2.micro```
+	 ```kops create cluster --name=${KOPS_CLUSTER_NAME} --ssh-public-key="~/.ssh/id_rsa.pub" --state=${KOPS_STATE_STORE} --zones=eu-west-1a --master-size=t2.micro --node-count=2 --node-size=t2.micro```
 
 
 Note : if you don't have DNS configuration you could just use gossip based DNS   "ie: zein.cluster.k8s.local""
 
-	kops create cluster --name=${KOPS_CLUSTER_NAME} --ssh-public-key="~/.ssh/id_rsa.pub" --state=s3://k8s-kops-berlin-zeineldin --zones=eu-west-1a --master-size=t2.micro --node-count=2 --node-size=t2.micro  --topology=private --networking=calico
+	kops create cluster --name=${KOPS_CLUSTER_NAME} --ssh-public-key="~/.ssh/id_rsa.pub" --state=${KOPS_STATE_STORE} --zones=eu-west-1a --master-size=t2.micro --node-count=2 --node-size=t2.micro  --topology=private --networking=calico
 	
 
 10. You could edit in the cluster 
