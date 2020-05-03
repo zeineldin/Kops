@@ -1,9 +1,8 @@
 ## Install and confiure KOPS on Ubunut 18 
 
-1. install kubectl 
-https://kubernetes.io/docs/tasks/tools/install-kubectl/
+1. install kubectl  --> https://kubernetes.io/docs/tasks/tools/install-kubectl/
 
-         curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+	curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
 	
 	```chmod +x ./kubectl```
 
@@ -22,6 +21,8 @@ https://kubernetes.io/docs/tasks/tools/install-kubectl/
 	```apt-get update```
 	
 	```install -y awscli``` 
+	
+Then do as the following  https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 
 4. configure the awscli using your AWS account "you could create free account"
 
