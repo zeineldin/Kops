@@ -58,7 +58,7 @@ it will be created in the default location which is ~/.ssh/id_rsa.pub
 
 8. export cluster and bucket name 
 
-	```export KOPS_CLUSTER_NAME=k8s.berlin.zeinedin.local```
+	```export KOPS_CLUSTER_NAME=cluster.zeinedin.local```
 
 9. create KOPS Cluster 
 
